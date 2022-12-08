@@ -63,7 +63,7 @@ for percent_complete in range(100):
 
 
 
-df =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/R7jpZMmKrJJJDoWyI7Ee5g/dobner_keyword_monitor.csv')
+df =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/R7jpZMmKrJJJDoWyI7Ee5g/new_dobner_keyword_monitor.csv')
 #df2 =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/FtuNWKMJKVUySGlR1lVmDg/live_windenergie.csv')
 #df3 =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/JUeq71McCykmR5ZrlZTJdQ/Andere_CEOs_3.csv')
 
@@ -142,23 +142,42 @@ df12 = df['query'].value_counts()
 
 
 
-df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=steuer&origin=FACETED_SEARCH&sid=Fvt&sortBy=%22date_posted%22", "Keyword"] = "Steuer"
+df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&heroEntityKey=urn%3Ali%3Aorganization%3A11870586&keywords=steuer&origin=FACETED_SEARCH&position=0&searchId=ad687b96-ac37-4dad-a72a-49ac8c08e75f&sid=fkq&sortBy=%22date_posted%22", "Keyword"] = "Steuer"
 df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=steuern&origin=GLOBAL_SEARCH_HEADER&sid=MbM&sortBy=%22date_posted%22", "Keyword"] = "Steuer"
-df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=erbschaftssteuer&origin=GLOBAL_SEARCH_HEADER&sid=(P%3A&sortBy=%22date_posted%22", "Keyword"] = "Erbschaftssteuer"
-df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=grundsteuer&origin=GLOBAL_SEARCH_HEADER&sid=SUA&sortBy=%22date_posted%22", "Keyword"] = "Grundsteuer"
-df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=ELSTER&origin=GLOBAL_SEARCH_HEADER&sid=GJC&sortBy=%22date_posted%22", "Keyword"] = "ELSTER"
+df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=Erbschaftssteuer&origin=GLOBAL_SEARCH_HEADER&sid=%2CPh&sortBy=%22date_posted%22", "Keyword"] = "Erbschaftssteuer"
+df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=Grundsteuer&origin=GLOBAL_SEARCH_HEADER&sid=1I4&sortBy=%22date_posted%22", "Keyword"] = "Grundsteuer"
+df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&heroEntityKey=urn%3Ali%3Aorganization%3A19970&keywords=elster&origin=FACETED_SEARCH&position=0&searchId=d3375d16-eaae-4d97-bf60-78dc566e2f08&sid=nah&sortBy=%22date_posted%22", "Keyword"] = "ELSTER"
 
-df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-month%22&keywords=Finanzamt&origin=FACETED_SEARCH&sid=2VO&sortBy=%22date_posted%22", "Keyword"] = "Finanzamt"
-df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-month%22&keywords=Steuerrecht&origin=GLOBAL_SEARCH_HEADER&sid=*C.&sortBy=%22date_posted%22", "Keyword"] = "Steuerrecht"
+df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=Finanzamt&origin=GLOBAL_SEARCH_HEADER&sid=JO~&sortBy=%22date_posted%22", "Keyword"] = "Finanzamt"
+df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=Steuerrecht&origin=GLOBAL_SEARCH_HEADER&sid=Qn6&sortBy=%22date_posted%22", "Keyword"] = "Steuerrecht"
+df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=tax%20law&origin=GLOBAL_SEARCH_HEADER&sid=~%2CM&sortBy=%22date_posted%22", "Keyword"] = "tax law"
+df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePosted=%22past-24h%22&keywords=Internationales&origin=GLOBAL_SEARCH_HEADER&sid=ZvW&sortBy=%22date_posted%22", "Keyword"] = "Internationales"
+
 
 df13 = df['Keyword'].value_counts()
 #st.write(df13)
 
 #########################
 
+
+col1, col2 = st.columns(2)
+
+with col1:
+   st.header("Select Time Range")
+   
+   number = st.number_input('Select the days you want to see the posts', min_value=1, max_value=30, value=1, step=1)
+   if number:
+            df = df[df['date']>=(dt.datetime.now()-dt.timedelta(days=number))] #hours = 6,12, 24
+            st.success(f'Monitor Posts from last {int(number)} Days', icon="✅")
+
+with col2:
+   
+        st.write('')
+
+
 st.header("Choose Keyword to Search")
 
-tab1, tab2, tab3, tab4, tab5, tab6,tab7, tab8, tab9, tab10, tab11, tab12, tab13, tab14 = st.tabs(["All", "Steuer", "ELSTER", "Grundsteuer", "Erbschaftssteuer", "Steuerrecht", "Finanzamt", "Internationales","Übererwerbsteuer","tax law", "Search for a Keyword Inside Posts","Rainer Holznagel","Christian Lindner","Dr. Dominik Benner"])
+tab1, tab2, tab3, tab4, tab5, tab6,tab7, tab8, tab9, tab10, tab11, tab12, tab13, tab14 = st.tabs(["All", "Steuer", "ELSTER", "Grundsteuer", "Erbschaftssteuer", "Steuerrecht", "Finanzamt", "Internationales","Übererwerbsteuer","Tax Law", "Search for a Keyword Inside Posts","Rainer Holznagel","Christian Lindner","Dr. Dominik Benner"])
 
 df_all = df
 df_renew = df.loc[df.Keyword == 'Steuer']
@@ -177,6 +196,12 @@ df_Steuerrecht = df_Steuerrecht.reset_index(drop=True)
 df_fin = df.loc[df.Keyword == 'Finanzamt']
 df_fin = df_fin.reset_index(drop=True)
 
+df_intern = df.loc[df.Keyword == 'Internationales']
+df_intern = df_intern.reset_index(drop=True)
+
+df_tax = df.loc[df.Keyword == 'tax law']
+df_tax = df_tax.reset_index(drop=True)
+
 
 df_all['Hour'] = pd.to_datetime(df_all.postDate).dt.strftime("%H")
 df_renew['Hour'] = pd.to_datetime(df_renew.postDate).dt.strftime("%H")
@@ -191,16 +216,17 @@ with tab1:
    if st.button('Show All Data'):
       st.write(df_all)
 
-   df_all = df_all[df_all['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   
    st.write(f'Total posts found in last Hours: ', df_all.shape[0])
-   st.subheader('Total Interaction getting in past hours in the day')
-   st.bar_chart(df_all, x='Hour', y='Total Interactions')
+#    st.subheader('Total Interaction getting in past hours in the day')
+#    st.bar_chart(df_all, x='Hour', y='Total Interactions')
 
-   st.header(f'Top Interacting 100 Posts today')
-   df_all.sort_values(['Total Interactions'], ascending=False, inplace=True)
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_all.sort_values(['postDate'], ascending=False, inplace=True)
    df_all = df_all.reset_index(drop=True)
-   df_all_100 = df_all.head(100)
-   num_posts = df_all_100.shape[0]
+   df_all_100 = df_all.head(200)
+   num_posts = df_all.shape[0]
 
    if  num_posts>0:
 
@@ -220,8 +246,10 @@ with tab1:
                         st.subheader(frames.fullName[i])
                         st.write('Personal Account')
                         st.write(c['title']) #postType
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -238,8 +266,9 @@ with tab1:
                         st.subheader(c['companyName'])
                         st.write('Corporate Account')
                         st.write('👥:  ',c['followerCount'])
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -249,17 +278,6 @@ with tab1:
                              st.write(c['postUrl']) #linktoPost
                         with st.expander('Link to  Company Profile 🔗'):
                              st.write(c['companyUrl']) #linktoProfile
-                        
-                    
-                    
-                       
-
-                    
-                    #st.write('Type of Post 📨:  ',c['type']) #postType
-                    
-                    if not pd.isnull(c['postImgUrl']):
-                        st.image(c['postImgUrl'])
-                        st.write('Image from the Post  🗾')
                     
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
@@ -272,13 +290,14 @@ with tab2:
    if st.button('Show Data with Keyword Steuer'):
       st.write(df_renew)
 
-   df_renew = df_renew[df_renew['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   #df_renew = df_renew[df_renew['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
    st.write(f'Total posts found in last Hours: ', df_renew.shape[0])
-   st.subheader('Total Interaction getting in past hours in the day')
-   st.bar_chart(df_renew, x='Hour', y='Total Interactions')
+#    st.subheader('Total Interaction getting in past hours in the day')
+#    st.bar_chart(df_renew, x='Hour', y='Total Interactions')
 
-   st.header(f'Top Interacting Posts today')
-   df_renew.sort_values(['Total Interactions'], ascending=False, inplace=True)
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_renew.sort_values(['postDate'], ascending=False, inplace=True)
    df_renew = df_renew.reset_index(drop=True)
    #df_renew_100 = df_renew.head(10)
    num_posts = df_renew.shape[0]
@@ -301,8 +320,10 @@ with tab2:
                         st.subheader(frames.fullName[i])
                         st.write('Personal Account')
                         st.write(c['title']) #postType
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -319,8 +340,9 @@ with tab2:
                         st.subheader(c['companyName'])
                         st.write('Corporate Account')
                         st.write('👥:  ',c['followerCount'])
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -330,17 +352,6 @@ with tab2:
                              st.write(c['postUrl']) #linktoPost
                         with st.expander('Link to  Company Profile 🔗'):
                              st.write(c['companyUrl']) #linktoProfile
-                        
-                    
-                    
-                       
-
-                    
-                    #st.write('Type of Post 📨:  ',c['type']) #postType
-                    
-                    if not pd.isnull(c['postImgUrl']):
-                        st.image(c['postImgUrl'])
-                        st.write('Image from the Post  🗾')
                     
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
@@ -351,13 +362,14 @@ with tab3:
    if st.button('Show Data with Keyword ELSTER'):
       st.write(df_wind)
 
-   df_wind = df_wind[df_wind['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   #df_wind = df_wind[df_wind['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
    st.write(f'Total posts found in last Hours: ', df_wind.shape[0])
-   st.subheader('Total Interaction getting in past hours in the day')
-   st.bar_chart(df_wind, x='Hour', y='Total Interactions')
+#    st.subheader('Total Interaction getting in past hours in the day')
+#    st.bar_chart(df_wind, x='Hour', y='Total Interactions')
 
-   st.header(f'Top Interacting Posts today')
-   df_wind.sort_values(['Total Interactions'], ascending=False, inplace=True)
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_wind.sort_values(['postDate'], ascending=False, inplace=True)
    df_wind = df_wind.reset_index(drop=True)
    #df_wind_100 = df_wind.head(10)
    num_posts = df_wind.shape[0]
@@ -380,8 +392,10 @@ with tab3:
                         st.subheader(frames.fullName[i])
                         st.write('Personal Account')
                         st.write(c['title']) #postType
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -398,8 +412,9 @@ with tab3:
                         st.subheader(c['companyName'])
                         st.write('Corporate Account')
                         st.write('👥:  ',c['followerCount'])
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -409,17 +424,6 @@ with tab3:
                              st.write(c['postUrl']) #linktoPost
                         with st.expander('Link to  Company Profile 🔗'):
                              st.write(c['companyUrl']) #linktoProfile
-                        
-                    
-                    
-                       
-
-                    
-                    #st.write('Type of Post 📨:  ',c['type']) #postType
-                    
-                    if not pd.isnull(c['postImgUrl']):
-                        st.image(c['postImgUrl'])
-                        st.write('Image from the Post  🗾')
                     
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
@@ -433,13 +437,14 @@ with tab4:
    if st.button('Show Data with Keyword Grundsteuer'):
       st.write(df_gru)
 
-   df_gru = df_gru[df_gru['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   #df_gru = df_gru[df_gru['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
    st.write(f'Total posts found in last Hours: ', df_gru.shape[0])
-   st.subheader('Total Interaction getting in past hours in the day')
-   st.bar_chart(df_gru, x='Hour', y='Total Interactions')
+#    st.subheader('Total Interaction getting in past hours in the day')
+#    st.bar_chart(df_gru, x='Hour', y='Total Interactions')
 
-   st.header(f'Top Interacting Posts today')
-   df_gru.sort_values(['Total Interactions'], ascending=False, inplace=True)
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_gru.sort_values(['postDate'], ascending=False, inplace=True)
    df_gru = df_gru.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_gru.shape[0]
@@ -462,8 +467,10 @@ with tab4:
                         st.subheader(frames.fullName[i])
                         st.write('Personal Account')
                         st.write(c['title']) #postType
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -480,8 +487,9 @@ with tab4:
                         st.subheader(c['companyName'])
                         st.write('Corporate Account')
                         st.write('👥:  ',c['followerCount'])
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -491,17 +499,6 @@ with tab4:
                              st.write(c['postUrl']) #linktoPost
                         with st.expander('Link to  Company Profile 🔗'):
                              st.write(c['companyUrl']) #linktoProfile
-                        
-                    
-                    
-                       
-
-                    
-                    #st.write('Type of Post 📨:  ',c['type']) #postType
-                    
-                    if not pd.isnull(c['postImgUrl']):
-                        st.image(c['postImgUrl'])
-                        st.write('Image from the Post  🗾')
                     
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
@@ -516,13 +513,14 @@ with tab5:
    if st.button('Show Data with Keyword Erbschaftssteuer'):
       st.write(df_erb)
 
-   df_erb = df_erb[df_erb['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   #df_erb = df_erb[df_erb['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
    st.write(f'Total posts found in last Hours: ', df_erb.shape[0])
-   st.subheader('Total Interaction getting in past hours in the day')
-   st.bar_chart(df_erb, x='Hour', y='Total Interactions')
+#    st.subheader('Total Interaction getting in past hours in the day')
+#    st.bar_chart(df_erb, x='Hour', y='Total Interactions')
 
-   st.header(f'Top Interacting Posts today')
-   df_erb.sort_values(['Total Interactions'], ascending=False, inplace=True)
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_erb.sort_values(['postDate'], ascending=False, inplace=True)
    df_erb = df_erb.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_erb.shape[0]
@@ -545,8 +543,10 @@ with tab5:
                         st.subheader(frames.fullName[i])
                         st.write('Personal Account')
                         st.write(c['title']) #postType
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -563,8 +563,9 @@ with tab5:
                         st.subheader(c['companyName'])
                         st.write('Corporate Account')
                         st.write('👥:  ',c['followerCount'])
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -574,17 +575,6 @@ with tab5:
                              st.write(c['postUrl']) #linktoPost
                         with st.expander('Link to  Company Profile 🔗'):
                              st.write(c['companyUrl']) #linktoProfile
-                        
-                    
-                    
-                       
-
-                    
-                    #st.write('Type of Post 📨:  ',c['type']) #postType
-                    
-                    if not pd.isnull(c['postImgUrl']):
-                        st.image(c['postImgUrl'])
-                        st.write('Image from the Post  🗾')
                     
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
@@ -595,13 +585,14 @@ with tab6:
    if st.button('Show Data with Keyword Steuerrecht'):
       st.write(df_Steuerrecht)
 
-   df_Steuerrecht = df_Steuerrecht[df_Steuerrecht['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   #df_Steuerrecht = df_Steuerrecht[df_Steuerrecht['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
    st.write(f'Total posts found in last Hours: ', df_Steuerrecht.shape[0])
-   st.subheader('Total Interaction getting in past hours in the day')
+   #st.subheader('Total Interaction getting in past hours in the day')
    #st.bar_chart(df_Steuerrecht, x='Hour', y='Total Interactions')
 
-   st.header(f'Top Interacting Posts today')
-   df_Steuerrecht.sort_values(['Total Interactions'], ascending=False, inplace=True)
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_Steuerrecht.sort_values(['postDate'], ascending=False, inplace=True)
    df_Steuerrecht = df_Steuerrecht.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_Steuerrecht.shape[0]
@@ -624,8 +615,10 @@ with tab6:
                         st.subheader(frames.fullName[i])
                         st.write('Personal Account')
                         st.write(c['title']) #postType
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -642,8 +635,9 @@ with tab6:
                         st.subheader(c['companyName'])
                         st.write('Corporate Account')
                         st.write('👥:  ',c['followerCount'])
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -653,17 +647,6 @@ with tab6:
                              st.write(c['postUrl']) #linktoPost
                         with st.expander('Link to  Company Profile 🔗'):
                              st.write(c['companyUrl']) #linktoProfile
-                        
-                    
-                    
-                       
-
-                    
-                    #st.write('Type of Post 📨:  ',c['type']) #postType
-                    
-                    if not pd.isnull(c['postImgUrl']):
-                        st.image(c['postImgUrl'])
-                        st.write('Image from the Post  🗾')
                     
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
@@ -675,13 +658,14 @@ with tab7:
    if st.button('Show Data with Keyword Finanzamt'):
       st.write(df_fin)
 
-   df_fin = df_fin[df_fin['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   #df_fin = df_fin[df_fin['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
    st.write(f'Total posts found in last Hours: ', df_fin.shape[0])
-   st.subheader('Total Interaction getting in past hours in the day')
+   #st.subheader('Total Interaction getting in past hours in the day')
    #st.bar_chart(df_Steuerrecht, x='Hour', y='Total Interactions')
 
-   st.header(f'Top Interacting Posts today')
-   df_fin.sort_values(['Total Interactions'], ascending=False, inplace=True)
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_fin.sort_values(['postDate'], ascending=False, inplace=True)
    df_fin = df_fin.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_fin.shape[0]
@@ -704,8 +688,10 @@ with tab7:
                         st.subheader(frames.fullName[i])
                         st.write('Personal Account')
                         st.write(c['title']) #postType
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -722,8 +708,9 @@ with tab7:
                         st.subheader(c['companyName'])
                         st.write('Corporate Account')
                         st.write('👥:  ',c['followerCount'])
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -733,17 +720,6 @@ with tab7:
                              st.write(c['postUrl']) #linktoPost
                         with st.expander('Link to  Company Profile 🔗'):
                              st.write(c['companyUrl']) #linktoProfile
-                        
-                    
-                    
-                       
-
-                    
-                    #st.write('Type of Post 📨:  ',c['type']) #postType
-                    
-                    if not pd.isnull(c['postImgUrl']):
-                        st.image(c['postImgUrl'])
-                        st.write('Image from the Post  🗾')
                     
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
@@ -752,16 +728,147 @@ with tab7:
 
 with tab8:
 
-   
-            st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
-            st.subheader('Oops... No new post found with the given keyword in last 24 Hours.')
-with tab9:
+   if st.button('Show Data with Keyword Internationales'):
+      st.write(df_intern)
 
-   
-            st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
-            st.subheader('Oops... No new post found with the given keyword in last 24 Hours.')
+   #df_fin = df_fin[df_fin['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   st.write(f'Total posts found in last Hours: ', df_intern.shape[0])
+   #st.subheader('Total Interaction getting in past hours in the day')
+   #st.bar_chart(df_Steuerrecht, x='Hour', y='Total Interactions')
 
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_intern.sort_values(['postDate'], ascending=False, inplace=True)
+   df_intern = df_intern.reset_index(drop=True)
+   #df_gru_100 = df_gru_100.head(10)
+   num_posts = df_intern.shape[0]
+
+   if  num_posts>0:
+
+     #splits = np.array_split(df5,5)
+     splits = df_intern.groupby(df_intern.index // 3)
+     for _, frames in splits:
+          frames = frames.reset_index(drop=True)
+          #print(frames.head())
+          thumbnails = st.columns(frames.shape[0])
+          for i, c in frames.iterrows():
+               with thumbnails[i]:
+
+                    if not pd.isnull(c['profileImgUrl']):
+                        st.image(c['profileImgUrl'], width=150)
+                    if not pd.isnull(c['profileUrl']):
+                        #st.image(c['profileImgUrl'], width=150)
+                        st.subheader(frames.fullName[i])
+                        st.write('Personal Account')
+                        st.write(c['title']) #postType
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
+                        st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
+                        st.write('Likes 👍:  ',c['likeCount']) #totInteractions
+                        st.write('Comments 💬:  ',c['commentCount']) #totInteractions
+                        #st.write('Action 📌:  ',c['action']) #totInteractions
+                        st.write('Publish Date & Time 📆:         ',c['postDate']) #publishDate
+                        with st.expander('Link to this Post 📮'):
+                             st.write(c['postUrl']) #linktoPost
+                        with st.expander('Link to  Profile 🔗'):
+                             st.write(c['profileUrl']) #linktoProfile
+                    
+                    if not pd.isnull(c['logoUrl']):
+                        st.image(c['logoUrl'], width=150)
+                    
+                        st.subheader(c['companyName'])
+                        st.write('Corporate Account')
+                        st.write('👥:  ',c['followerCount'])
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
+                        st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
+                        st.write('Likes 👍:  ',c['likeCount']) #totInteractions
+                        st.write('Comments 💬:  ',c['commentCount']) #totInteractions
+                        #st.write('Action 📌:  ',c['action']) #totInteractions
+                        st.write('Publish Date & Time 📆:         ',c['postDate']) #publishDate
+                        with st.expander('Link to this Post 📮'):
+                             st.write(c['postUrl']) #linktoPost
+                        with st.expander('Link to  Company Profile 🔗'):
+                             st.write(c['companyUrl']) #linktoProfile
+                    
+   else:
+            st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
+            st.subheader('Oops... No new post found in last Hours.')
 with tab10:
+
+   if st.button('Show Data with Keyword Tax Law'):
+      st.write(df_tax)
+
+   #df_fin = df_fin[df_fin['date']>=(dt.datetime.now()-dt.timedelta(days=1))] #hours = 6,12, 24
+   st.write(f'Total posts found in last Hours: ', df_tax.shape[0])
+   #st.subheader('Total Interaction getting in past hours in the day')
+   #st.bar_chart(df_Steuerrecht, x='Hour', y='Total Interactions')
+
+   st.header(f'Most Recent Posts')
+   st.info('Most recent posts appear first', icon="ℹ️")
+   df_tax.sort_values(['postDate'], ascending=False, inplace=True)
+   df_tax = df_tax.reset_index(drop=True)
+   #df_gru_100 = df_gru_100.head(10)
+   num_posts = df_tax.shape[0]
+
+   if  num_posts>0:
+
+     #splits = np.array_split(df5,5)
+     splits = df_tax.groupby(df_tax.index // 3)
+     for _, frames in splits:
+          frames = frames.reset_index(drop=True)
+          #print(frames.head())
+          thumbnails = st.columns(frames.shape[0])
+          for i, c in frames.iterrows():
+               with thumbnails[i]:
+
+                    if not pd.isnull(c['profileImgUrl']):
+                        st.image(c['profileImgUrl'], width=150)
+                    if not pd.isnull(c['profileUrl']):
+                        #st.image(c['profileImgUrl'], width=150)
+                        st.subheader(frames.fullName[i])
+                        st.write('Personal Account')
+                        st.write(c['title']) #postType
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
+                        st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
+                        st.write('Likes 👍:  ',c['likeCount']) #totInteractions
+                        st.write('Comments 💬:  ',c['commentCount']) #totInteractions
+                        #st.write('Action 📌:  ',c['action']) #totInteractions
+                        st.write('Publish Date & Time 📆:         ',c['postDate']) #publishDate
+                        with st.expander('Link to this Post 📮'):
+                             st.write(c['postUrl']) #linktoPost
+                        with st.expander('Link to  Profile 🔗'):
+                             st.write(c['profileUrl']) #linktoProfile
+                    
+                    if not pd.isnull(c['logoUrl']):
+                        st.image(c['logoUrl'], width=150)
+                    
+                        st.subheader(c['companyName'])
+                        st.write('Corporate Account')
+                        st.write('👥:  ',c['followerCount'])
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
+                        st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
+                        st.write('Likes 👍:  ',c['likeCount']) #totInteractions
+                        st.write('Comments 💬:  ',c['commentCount']) #totInteractions
+                        #st.write('Action 📌:  ',c['action']) #totInteractions
+                        st.write('Publish Date & Time 📆:         ',c['postDate']) #publishDate
+                        with st.expander('Link to this Post 📮'):
+                             st.write(c['postUrl']) #linktoPost
+                        with st.expander('Link to  Company Profile 🔗'):
+                             st.write(c['companyUrl']) #linktoProfile
+                    
+   else:
+            st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
+            st.subheader('Oops... No new post found in last Hours.')
+with tab9:
 
    
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
@@ -830,8 +937,10 @@ with tab11:
                         st.subheader(frames.fullName[i])
                         st.write('Personal Account')
                         st.write(c['title']) #postType
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        st.write('-----------')
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -848,8 +957,9 @@ with tab11:
                         st.subheader(c['companyName'])
                         st.write('Corporate Account')
                         st.write('👥:  ',c['followerCount'])
-                        with st.expander('Post Content 📜'):
-                             st.write(c['textContent'])  #postContent
+                        if not pd.isnull(c['postImgUrl']):
+                            st.image(c['postImgUrl'])
+                        st.info(c['textContent'])  #postContent
                         st.write('Total Interactions 📈:  ',c['Total Interactions']) #totInteractions
                         st.write('Likes 👍:  ',c['likeCount']) #totInteractions
                         st.write('Comments 💬:  ',c['commentCount']) #totInteractions
@@ -859,17 +969,6 @@ with tab11:
                              st.write(c['postUrl']) #linktoPost
                         with st.expander('Link to  Company Profile 🔗'):
                              st.write(c['companyUrl']) #linktoProfile
-                        
-                    
-                    
-                       
-
-                    
-                    #st.write('Type of Post 📨:  ',c['type']) #postType
-                    
-                    if not pd.isnull(c['postImgUrl']):
-                        st.image(c['postImgUrl'])
-                        st.write('Image from the Post  🗾')
                     
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
