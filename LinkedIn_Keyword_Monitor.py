@@ -34,7 +34,7 @@ with col2:
 
 st.sidebar.success("Choose Category")
 
-st.title('LinkedIn Keyword Search Monitoring')
+st.title('Dobner: LinkedIn Keyword Search Monitoring')
 
 st.image(
     "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/640px-LinkedIn_logo_initials.png",
