@@ -32,7 +32,7 @@ with col2:
    
    st.header("Data Team Dashboard")
 
-st.sidebar.success("Choose Category")
+#st.sidebar.success("Choose Category")
 
 st.title('Dobner: LinkedIn Keyword Search Monitoring')
 
