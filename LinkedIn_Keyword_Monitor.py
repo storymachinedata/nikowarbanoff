@@ -63,7 +63,7 @@ for percent_complete in range(100):
 
 
 
-df =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor6.csv')
+df =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor7.csv')
 #df2 =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/FtuNWKMJKVUySGlR1lVmDg/live_windenergie.csv')
 #df3 =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/JUeq71McCykmR5ZrlZTJdQ/Andere_CEOs_3.csv')
 
@@ -171,13 +171,20 @@ with col1:
             st.success(f'Monitor Posts from last {int(number)} Days', icon="✅")
 
 with col2:
-   
-        st.write('')
+   st.header('Choose Filter') 
+
+
+   option = st.selectbox(
+    'How would you like to filter posts',
+    ('Total Interactions','postDate'))
+    
 
 
 st.header("Choose Keyword to Search")
 
 tab1, tab2, tab3, tab4, tab5, tab6,tab7, tab8, tab9, tab10, tab11, tab12, tab13, tab14 = st.tabs(["All", "Steuer", "ELSTER", "Grundsteuer", "Erbschaftssteuer", "Steuerrecht", "Finanzamt", "Internationales","Übererwerbsteuer","Tax Law", "Search for a Keyword Inside Posts","Rainer Holznagel","Christian Lindner","Dr. Dominik Benner"])
+df.sort_values([option], ascending=False, inplace=True)
+
 
 df_all = df
 df_renew = df.loc[df.Keyword == 'Steuer']
