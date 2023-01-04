@@ -177,6 +177,7 @@ with col2:
    option = st.selectbox(
     'How would you like to filter posts',
     ('Total Interactions','postDate'))
+   st.success(f'Posts will filter based on  {option} ', icon="✅")
     
 
 
