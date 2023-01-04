@@ -218,6 +218,7 @@ df_gru['Hour'] = pd.to_datetime(df_gru.postDate).dt.strftime("%H")
 df_erb['Hour'] = pd.to_datetime(df_erb.postDate).dt.strftime("%H")
 
 
+
 with tab1:
 
    if st.button('Show All Data'):
@@ -229,8 +230,11 @@ with tab1:
 #    st.bar_chart(df_all, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_all.sort_values(['postDate'], ascending=False, inplace=True)
+   #df_all.rename(columns={'postDate': 'Date of Posted'}, inplace=True)
+   
+   
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   
    df_all = df_all.reset_index(drop=True)
    df_all_100 = df_all.head(200)
    num_posts = df_all.shape[0]
@@ -303,8 +307,8 @@ with tab2:
 #    st.bar_chart(df_renew, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_renew.sort_values(['postDate'], ascending=False, inplace=True)
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   #df_renew.sort_values(['postDate'], ascending=False, inplace=True)
    df_renew = df_renew.reset_index(drop=True)
    #df_renew_100 = df_renew.head(10)
    num_posts = df_renew.shape[0]
@@ -375,8 +379,8 @@ with tab3:
 #    st.bar_chart(df_wind, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_wind.sort_values(['postDate'], ascending=False, inplace=True)
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   #df_wind.sort_values(['postDate'], ascending=False, inplace=True)
    df_wind = df_wind.reset_index(drop=True)
    #df_wind_100 = df_wind.head(10)
    num_posts = df_wind.shape[0]
@@ -450,8 +454,8 @@ with tab4:
 #    st.bar_chart(df_gru, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_gru.sort_values(['postDate'], ascending=False, inplace=True)
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   #df_gru.sort_values(['postDate'], ascending=False, inplace=True)
    df_gru = df_gru.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_gru.shape[0]
@@ -526,8 +530,8 @@ with tab5:
 #    st.bar_chart(df_erb, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_erb.sort_values(['postDate'], ascending=False, inplace=True)
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   #df_erb.sort_values(['postDate'], ascending=False, inplace=True)
    df_erb = df_erb.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_erb.shape[0]
@@ -598,8 +602,8 @@ with tab6:
    #st.bar_chart(df_Steuerrecht, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_Steuerrecht.sort_values(['postDate'], ascending=False, inplace=True)
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   #df_Steuerrecht.sort_values(['postDate'], ascending=False, inplace=True)
    df_Steuerrecht = df_Steuerrecht.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_Steuerrecht.shape[0]
@@ -671,8 +675,8 @@ with tab7:
    #st.bar_chart(df_Steuerrecht, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_fin.sort_values(['postDate'], ascending=False, inplace=True)
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   #df_fin.sort_values(['postDate'], ascending=False, inplace=True)
    df_fin = df_fin.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_fin.shape[0]
@@ -744,8 +748,8 @@ with tab8:
    #st.bar_chart(df_Steuerrecht, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_intern.sort_values(['postDate'], ascending=False, inplace=True)
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   #df_intern.sort_values(['postDate'], ascending=False, inplace=True)
    df_intern = df_intern.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_intern.shape[0]
@@ -815,8 +819,8 @@ with tab10:
    #st.bar_chart(df_Steuerrecht, x='Hour', y='Total Interactions')
 
    st.header(f'Most Recent Posts')
-   st.info('Most recent posts appear first', icon="ℹ️")
-   df_tax.sort_values(['postDate'], ascending=False, inplace=True)
+   st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+   #df_tax.sort_values(['postDate'], ascending=False, inplace=True)
    df_tax = df_tax.reset_index(drop=True)
    #df_gru_100 = df_gru_100.head(10)
    num_posts = df_tax.shape[0]
@@ -980,6 +984,8 @@ with tab11:
    else:
             st.image('https://img.freepik.com/premium-vector/hazard-warning-attention-sign-with-exclamation-mark-symbol-white_231786-5218.jpg?w=2000', width =200)
             st.subheader(f'Oops... No new post found with keyword {title}.')
+
+
 
 
 
