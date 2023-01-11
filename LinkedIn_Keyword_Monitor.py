@@ -398,16 +398,21 @@ with account_monitor:
 	acc_df['Branche'] = acc_df.profileUrl.apply(lambda x : url2Branch_mapper[x])
 	acc_df.reset_index(drop=True, inplace=True)
 
+	df.sort_values([option], ascending=False, inplace=True)
+
+	if number:
+		acc_df = acc_df[acc_df['date']>=(dt.datetime.now()-dt.timedelta(days=number))] #hours = 6,12, 24
+		st.success(f'Monitor Posts from last {int(number)} Days', icon="✅")
 
 
-	option = st.selectbox(
+	option_branch = st.selectbox(
     'How would you like to filter posts',
     ('Akademisch','Journalismus',
 	'Politik', 'Steuerberater',
 	'Unternehmer', 'Wirtschaftsinstitut',
 	'Richter', 'Versicherungen'))
 	st.success(f'Displaying Posts for account related to branch  {option} ', icon="✅")
-	printAccountInfo(acc_df, option)
+	printAccountInfo(acc_df, option_branch)
 
 
 	#st.success(f'Posts will filter based on  {option} ', icon="✅")
