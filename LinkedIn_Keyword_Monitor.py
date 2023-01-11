@@ -411,7 +411,7 @@ with account_monitor:
 	'Politik', 'Steuerberater',
 	'Unternehmer', 'Wirtschaftsinstitut',
 	'Richter', 'Versicherungen'))
-	st.success(f'Displaying Posts for account related to branch  {option} ', icon="✅")
+	st.success(f'Displaying Posts for account related to branch  {option_branch} ', icon="✅")
 	printAccountInfo(acc_df, option_branch)
 
 
