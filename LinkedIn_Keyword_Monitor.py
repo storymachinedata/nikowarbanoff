@@ -44,22 +44,7 @@ for percent_complete in range(100):
 	my_bar.progress(percent_complete + 1)
 
 
-<<<<<<< HEAD
-df =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor10.csv')
-=======
 df =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor11.csv')
-#df2 =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/FtuNWKMJKVUySGlR1lVmDg/live_windenergie.csv')
-#df3 =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/JUeq71McCykmR5ZrlZTJdQ/Andere_CEOs_3.csv')
-
-# df1.insert(len(df1.columns), 'Keyword', 'Renewable Energy')
-# df2.insert(len(df2.columns), 'Keyword', 'Wind Energy')
-
-# frames = [df1, df2]
-
-# df = pd.concat(frames)
-
-
->>>>>>> e7b63dab908a24a8d63c4d3f85dd3d283b7dd89b
 df = df.dropna(how='any', subset=['textContent'])
 df.drop(['connectionDegree', 'timestamp'], axis=1, inplace=True)
 
