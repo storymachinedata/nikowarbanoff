@@ -7,6 +7,15 @@ import re
 
 
 
+month = datetime.today().month
+day = datetime.today().day
+
+dobner_search_results = f'https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor{month}_{day}.csv'
+
+
+
+
+
 url2name_mapper = {'https://www.linkedin.com/in/julia-jaekel/': 'Julia Jaekel',
  'https://www.linkedin.com/in/prof-dr-yasmin-wei%C3%9F-731a51157/': 'Prof. Dr. Yasmin Weiß',
  'https://www.linkedin.com/in/arnoldweissman/?originalSubdomain=de': 'Arnold Weissmann',
