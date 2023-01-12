@@ -44,7 +44,7 @@ for percent_complete in range(100):
 	my_bar.progress(percent_complete + 1)
 
 
-df =pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor11.csv')
+df =pd.read_csv(dobner_search_results)
 df = df.dropna(how='any', subset=['textContent'])
 df.drop(['connectionDegree', 'timestamp'], axis=1, inplace=True)
 
