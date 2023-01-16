@@ -43,7 +43,7 @@ for percent_complete in range(100):
 	time.sleep(0.05)
 	my_bar.progress(percent_complete + 1)
 
-
+st.write(dobner_search_results)
 df =pd.read_csv(dobner_search_results)
 df = df.dropna(how='any', subset=['textContent'])
 df.drop(['connectionDegree', 'timestamp'], axis=1, inplace=True)
