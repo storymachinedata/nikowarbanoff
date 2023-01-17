@@ -43,6 +43,14 @@ for percent_complete in range(100):
 	time.sleep(0.05)
 	my_bar.progress(percent_complete + 1)
 
+
+month = datetime.today().month
+day = datetime.today().day
+
+dobner_search_results = f'https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor{month}_{day}.csv'
+
+
+
 df =pd.read_csv(dobner_search_results)
 df = df.dropna(how='any', subset=['textContent'])
 df.drop(['connectionDegree', 'timestamp'], axis=1, inplace=True)
@@ -78,10 +86,6 @@ df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePo
 df13 = df['Keyword'].value_counts()
 
 
-month = datetime.today().month
-day = datetime.today().day
-
-dobner_search_results = f'https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor{month}_{day}.csv'
 
 
 
