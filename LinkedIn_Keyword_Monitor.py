@@ -78,7 +78,7 @@ df.loc[(df['query']) == "https://www.linkedin.com/search/results/content/?datePo
 df13 = df['Keyword'].value_counts()
 
 
-st.write(f'last updated : {month}/{day}')
+st.write(f'last updated : {month}-{day}')
 col1, col2 = st.columns(2)
 
 with col1:
