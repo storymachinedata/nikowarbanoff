@@ -419,7 +419,7 @@ with account_monitor:
 
 	option_branch = st.selectbox(
     'How would you like to filter posts',
-    ('Akademisch','Journalismus',
+    ('All','Akademisch','Journalismus',
 	'Politik', 'Steuerberater',
 	'Unternehmer', 'Wirtschaftsinstitut',
 	'Richter', 'Versicherungen'))

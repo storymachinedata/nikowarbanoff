@@ -143,9 +143,13 @@ def printError():
 
 
 def printAccountInfo(dataframe, option):
-    dataframe_copy = dataframe[dataframe.Branche == option]
+    if option != 'All':
+        dataframe_copy = dataframe[dataframe.Branche == option]
+    else:
+        dataframe_copy = dataframe
     dataframe_copy = dataframe_copy.reset_index(drop=True)
     num_post = dataframe_copy.shape[0]
+    st.write(f'There are {num_post}  posts: ')
     if num_post>0:
         splits = dataframe_copy.groupby(dataframe_copy.index//3)
         for _,frame in splits:
