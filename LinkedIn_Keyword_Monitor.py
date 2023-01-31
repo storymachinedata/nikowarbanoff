@@ -137,7 +137,9 @@ search_results, account_monitor = st.tabs(['Linkedin Search Results', 'Account M
 with search_results:
 ## subtab under search results tabs
 	#tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12, tab13, tab14 = st.tabs(["All", "Steuer", "ELSTER", "Grundsteuer", "Erbschaftssteuer", "Steuerrecht", "Finanzamt", "Internationales","Übererwerbsteuer","Tax Law", "Search for a Keyword Inside Posts","Rainer Holznagel","Christian Lindner","Dr. Dominik Benner"])
-	tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11,tab12 = st.tabs(["All", "DB E.C.O. Group", "DB Engineering & Consulting", "Niko Warbanoff", "Future of Mobility", "Transformation of Transportation", "Transformation of Mobility", "Rail Industry","Railway Industry","Digital Rail","Deutsche Bahn International", "Search for a Keyword Inside Posts"])
+	#tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11,tab12 = st.tabs(["All", "DB E.C.O. Group", "DB Engineering & Consulting", "Niko Warbanoff", "Future of Mobility", "Transformation of Transportation", "Transformation of Mobility", "Rail Industry","Railway Industry","Digital Rail","Deutsche Bahn International", "Search for a Keyword Inside Posts"])
+	tab1, tab2, tab3, tab4, tab5, tab12 = st.tabs(["All", "DB E.C.O. Group", "DB Engineering & Consulting", "Niko Warbanoff",'Other Keywords', "Search for a Keyword Inside Posts"])
+
 	df.sort_values([option], ascending=False, inplace=True)
 	df_all = df
 
@@ -178,6 +180,12 @@ with search_results:
 	df_tax['Hour'] = pd.to_datetime(df_tax.postDate).dt.strftime("%H")
 	df_dr['Hour'] = pd.to_datetime(df_dr.postDate).dt.strftime("%H")
 	df_dbi['Hour'] = pd.to_datetime(df_dbi.postDate).dt.strftime("%H")
+
+
+	df_all_keywords = pd.concat([df_erb,df_Steuerrecht,df_fin,df_intern,df_tax,df_dr,df_dbi], axis=0)
+	df_all_keywords = df_all_keywords.reset_index(drop=True)
+
+
 
 
 
@@ -280,8 +288,59 @@ with search_results:
 						printFunction(i, c, frames)               				
 		else:
 			printError()
+	
+	with tab5:
+		if st.button('Show Data with Keyword Future of Mobility , Transformation of Transportation, Transformation of Mobility, Rail Industry, Railway Industry, Digial Rail and DB International'):
+			st.write(df_all_keywords)
+
+		st.write(f'Total posts found in last Hours: ', df_all_keywords.shape[0])
+		st.header(f'Most Recent Posts')
+		st.info(f'Most recent posts appear based on {option}', icon="ℹ️")
+
+		df_all_keywords = df_all_keywords.reset_index(drop=True)
+		num_posts = df_all_keywords.shape[0]
+
+		if  num_posts>0:
+			splits = df_all_keywords.groupby(df_all_keywords.index // 3)
+			for _, frames in splits:
+				frames = frames.reset_index(drop=True)
+				thumbnails = st.columns(frames.shape[0])
+				for i, c in frames.iterrows():
+					with thumbnails[i]:
+							printFunction(i, c, frames)             
+		else:
+			printError()
 
 
+	with tab12:
+		title = st.text_input('Search for a keyword inside posts', 'sustainability')
+		title = title.lower()
+		df_all.textContent= df_all.textContent.str.lower()
+
+		df_all['client'] = df_all.textContent.str.contains(title)
+		df_search = df_all.loc[df_all.client == 1] 
+		df_search = df_search.reset_index(drop=True)
+		st.write(f'Posts found with keyword {title}:',df_search.shape[0])
+		st.header(f'Posts which mention the keyword {title}')
+
+		num_posts = df_search.shape[0]
+
+		if  num_posts>0:
+			splits = df_search.groupby(df_search.index // 3)
+			for _, frames in splits:
+				frames = frames.reset_index(drop=True)
+				thumbnails = st.columns(frames.shape[0])
+				for i, c in frames.iterrows():
+					with thumbnails[i]:
+						printFunction(i, c, frames)       		
+		else:
+			printError()
+
+
+
+
+
+"""
 	with tab5:
 		if st.button('Show Data with Keyword Future of Mobility'):
 			st.write(df_erb)
@@ -454,31 +513,7 @@ with search_results:
 #		printError()
 
 
-
-
-	with tab12:
-		title = st.text_input('Search for a keyword inside posts', 'sustainability')
-		title = title.lower()
-		df_all.textContent= df_all.textContent.str.lower()
-
-		df_all['client'] = df_all.textContent.str.contains(title)
-		df_search = df_all.loc[df_all.client == 1] 
-		df_search = df_search.reset_index(drop=True)
-		st.write(f'Posts found with keyword {title}:',df_search.shape[0])
-		st.header(f'Posts which mention the keyword {title}')
-
-		num_posts = df_search.shape[0]
-
-		if  num_posts>0:
-			splits = df_search.groupby(df_search.index // 3)
-			for _, frames in splits:
-				frames = frames.reset_index(drop=True)
-				thumbnails = st.columns(frames.shape[0])
-				for i, c in frames.iterrows():
-					with thumbnails[i]:
-						printFunction(i, c, frames)       		
-		else:
-			printError()
+"""
 
 
 
