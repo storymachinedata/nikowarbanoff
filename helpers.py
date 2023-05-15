@@ -7,14 +7,6 @@ import re
 
 
 
-# month = datetime.today().month
-# day = datetime.today().day
-
-# dobner_search_results = f'https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/WVWDm0XnEmqgQ4iNu89Rkg/dobner_keywordSearchMonitor{month}_{day}.csv'
-
-
-
-
 
 url2name_mapper = {'https://www.linkedin.com/in/julia-jaekel/': 'Julia Jaekel',
  'https://www.linkedin.com/in/prof-dr-yasmin-wei%C3%9F-731a51157/': 'Prof. Dr. Yasmin Weiß',
@@ -95,10 +87,24 @@ def getActualDate(url):
 
 
 
+
+
 def printFunction(i, rows, dataframe):
-    if 'profileImgUrl' in dataframe.columns:
-        if not pd.isnull(rows['profileImgUrl']):
-            st.image(rows['profileImgUrl'], width=150)
+   
+    if not pd.isnull(rows['companyUrl']):
+        st.subheader(rows.companyName)
+        st.write('Company Account')
+      
+        st.info(rows['textContent'])
+        st.write('Total Interactions 📈:  ',rows['Total Interactions'])
+        st.write('Likes 👍:  ',rows['likeCount']) 
+        st.write('Comments 💬:  ',rows['commentCount'])
+        st.write('Publish Date & Time 📆:         ',rows['postDate']) #publishDate
+        with st.expander('Link to this Post 📮'):
+                st.write(rows['postUrl']) #linktoPost
+        with st.expander('Link to  Profile 🔗'):
+                st.write(rows['companyUrl']) #linktoProfile
+
 
     if not pd.isnull(rows['profileUrl']):
         #st.image(rows['profileImgUrl'], width=150)
@@ -106,9 +112,7 @@ def printFunction(i, rows, dataframe):
         st.write('Personal Account')
         st.write(rows['title']) #postType
         st.write('-----------')
-        if 'postImgUrl' in dataframe.columns: 
-            if not pd.isnull(rows['postImgUrl']):
-                st.image(rows['postImgUrl'])
+       
         st.info(rows['textContent'])  #postrowsontent
         st.write('Total Interactions 📈:  ',rows['Total Interactions']) #totInterarowstions
         st.write('Likes 👍:  ',rows['likeCount']) #totInterarowstions
@@ -119,21 +123,6 @@ def printFunction(i, rows, dataframe):
                 st.write(rows['postUrl']) #linktoPost
         with st.expander('Link to  Profile 🔗'):
                 st.write(rows['profileUrl']) #linktoProfile
-
-    # if 'logoUrl' in dataframe.columns:
-    #     if not pd.isnull(rows['logoUrl']):
-    #         st.image(rows['logoUrl'], width=150)
-
-    # st.subheader(rows['companyName'])
-    # st.write('Corporate Account')
-    # st.write('👥:  ',rows['followerCount'])
-
-    # if 'postImgUrl' in dataframe.columns:
-    #     if not pd.isnull(rows['postImgUrl']):
-    #         st.image(rows['postImgUrl'])
-  
-    # with st.expander('Link to  Company Profile 🔗'):
-    #         st.write(rows['companyUrl']) #linktoProfile
 
 
 def printError():

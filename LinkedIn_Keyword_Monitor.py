@@ -1,9 +1,6 @@
-import numpy as np
-import altair as alt
 import pandas as pd
 import streamlit as st
-from datetime import datetime, timedelta
-import pytz
+from datetime import datetime
 import re
 import time
 import datetime as dt
@@ -341,38 +338,3 @@ with search_results:
 
 with account_monitor:
 	st.write('More to follow!')
-	
-	#acc_df = pd.read_csv('https://phantombuster.s3.amazonaws.com/UhrenaxfEnY/PB6agmKm3dPp5oU6GwuSXw/dobner_account_monitor.csv')
-	#acc_df = acc_df.dropna(how='any', subset=['postContent'])
-	#acc_df = acc_df.drop(columns = ['timestamp', 'error', 'postDate', 'viewCount'])
-	#acc_df['postDate'] = acc_df.postUrl.apply(getActualDate)
-	#acc_df['date'] =  pd.to_datetime(acc_df['postDate'])
-	#acc_df.drop_duplicates(subset=['postUrl'], inplace=True)
-	#acc_df = acc_df.reset_index(drop=True)
-	#acc_df['likeCount'] = acc_df['likeCount'].fillna(0).astype(int)
-	#acc_df['commentCount'] = acc_df['commentCount'].fillna(0).astype(int)
-	#acc_df['Total Interactions'] = acc_df['likeCount'] + acc_df['commentCount']
-	#acc_df['Total Interactions'] = acc_df['Total Interactions'].astype(int)
-	#acc_df['Account_Name'] = acc_df.profileUrl.apply(lambda x : url2name_mapper[x])
-	#acc_df['Branche'] = acc_df.profileUrl.apply(lambda x : url2Branch_mapper[x])
-	#acc_df.reset_index(drop=True, inplace=True)
-
-	#df.sort_values([option], ascending=False, inplace=True)
-
-	#if number:
-		#acc_df = acc_df[acc_df['date']>=(dt.datetime.now()-dt.timedelta(days=number))] #hours = 6,12, 24
-		#st.success(f'Monitor Posts from last {int(number)} Days', icon="✅")
-
-
-	#option_branch = st.selectbox(
-    #'How would you like to filter posts',
-    #('All','Akademisch','Journalismus',
-	#'Politik', 'Steuerberater',
-	#'Unternehmer', 'Wirtschaftsinstitut',
-	#'Richter', 'Versicherungen'))
-	#st.success(f'Displaying Posts for account related to branch  {option_branch} ', icon="✅")
-	#printAccountInfo(acc_df, option_branch)
-
-
-	#st.success(f'Posts will filter based on  {option} ', icon="✅")
-
