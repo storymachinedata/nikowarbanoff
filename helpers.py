@@ -5,7 +5,7 @@ import re
 
 
 
-
+name = 'myname'
 
 
 url2name_mapper = {'https://www.linkedin.com/in/julia-jaekel/': 'Julia Jaekel',
